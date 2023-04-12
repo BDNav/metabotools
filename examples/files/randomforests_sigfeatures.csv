@@ -1,0 +1,468 @@
+"","MeanDecreaseAccuracy"
+"SM(d18:1/12:0)",0.0027955
+"Serotonin",0.0023527
+"Linoleic acid",0.0021223
+"Lutein",0.0019014
+"Phosphorylcholine",0.0016738
+"PE(34:1)",0.0014782
+"PC(16:0/20:4)",0.001291
+"CoQ10H2",0.0010578
+"Zeaxanthin",0.0010546
+"Isovalerylglycine",0.001026
+"Methylcysteine",0.0009447
+"SM(d18:1/26:0 OH)",0.00094142
+"Indoxyl sulfate",0.00086814
+"2-Isopropylmalic acid",0.00083555
+"7-methylguanine",0.00083048
+"L-Carnitine",0.00082025
+"SM (d18:1/24:2)",0.00077725
+"Phosphoenolpyruvic acid",0.00076743
+"Ceramide(d18:1/12:0)",0.00071385
+"Ceramide(d18:1/24:1)",0.00067097
+"Isovalerylcarnitine",0.00066479
+"Betaine",0.00061709
+"PC(24:0/P-18:0)",0.00058106
+"PI(36:0)",0.00057902
+"Oleic acid",0.00056992
+"PE(20:4/18:1)",0.00056753
+"Ceramide(d18:1/24:0)",0.00055248
+"PC(18:0/20:3)",0.00054605
+"CoQ10",0.00050113
+"PI(36:1)",0.00046686
+"Hexose Monophosphate Pool",0.00046189
+"Ribose 5-phosphate",0.0004583
+"DeoxyCer(m18:1/20:0)",0.00041714
+"Glycerol 3-phosphate",0.00040703
+"SM(d18:1/18:1)",0.00040431
+"Glyceric acid",0.00038952
+"PG(36:2)",0.0003754
+"PG(34:1)",0.00035633
+"SM(d18:1/20:1)",0.00035156
+"PS(36:0)",0.00032839
+"Ceramide(d18:1/18:2 OH)",0.00030747
+"3-Hydroxylinoleylcarnitine",0.00030371
+"SM(d18:1/18:2 OH)",0.00028567
+"Octulose-monophosphate",0.00027521
+"PE(36:1)",0.00027248
+"2-Ketobutyric acid",0.00027137
+"L-isoleucine",0.0002653
+"PS(18:0/20:4)",0.00025551
+"SM(d18:1/16:2)",0.00025299
+"Adenosine diphosphate",0.0002504
+"PS(18:0/18:1)",0.00024869
+"Tiglylcarnitine",0.00024715
+"FAD",0.00024429
+"Hexose Disaccharide Pool",0.00024287
+"Glycocholic acid",0.00023911
+"Phenylacetylglutamine",0.0002273
+"DHC(18:1/24:1)",0.00022636
+"SM(d18:1/20:2 OH)",0.00022147
+"L-Threonine",0.00021802
+"4-Ethylphenyl sulfate",0.00021654
+"PE(36:3)",0.00021373
+"PG(34:2)",0.00021312
+"BMP(18:1/20:4)",0.0002128
+"Chenodeoxycholic acid",0.00021261
+"PE(34:2)",0.00021141
+"MHC(18:1/24:1)",0.00020825
+"Imidazoleacetic acid",0.00020048
+"L-Tyrosine",0.00020036
+"Uridine",0.0001993
+"Sphingosine(d18:1)",0.00019544
+"Ceramide(d18:1/24:0 OH)",0.00019312
+"SM(d18:1/16:2 OH)",0.00019303
+"Ceramide(d18:1/20:0)",0.00018985
+"1-deoxysphingosine(m18:1)",0.00018758
+"Nicotinamide riboside",0.00018607
+"Butyrylcarnitine",0.0001793
+"DHC(18:1/16:0)",0.00017861
+"Cortisone",0.00017846
+"15-HETE",0.00017804
+"Ceramide(d18:1/18:1)",0.00017345
+"Glutamine",0.00017343
+"Glycerol",0.00017313
+"3-Hydroxyisovaleryl Carnitine",0.00016959
+"Xanthine",0.00016917
+"PC(16:0/16:0)",0.00016743
+"3-Aminoisobutyric acid",0.00016308
+"Pantothenic acid",0.0001623
+"Lysine_Glutamine",0.00016118
+"PC(30:0)",0.00015844
+"Homoarginine",0.0001526
+"Prostaglandin J2",0.00014794
+"Ceramide(d18:1/22:0)",0.00014271
+"2-Keto-L-gluconate",0.00014258
+"Riboflavin",0.00014244
+"PE(36:4)",0.00014192
+"O-acetylserine",0.00013958
+"PS(34:2)",0.00013641
+"Cortisol",0.00012936
+"Dimethyl-L-arginine",0.00012364
+"Ceramide(d18:1/23:0) or Ceramide(d18:1/22:1 OH)",0.00012256
+"PI(34:2)",0.00012147
+"PS(36:2)",0.00011938
+"4-Hydroxyphenyllactic acid",0.00011877
+"THC 18:1/24:0",0.00011227
+"N-Acetylglutamic acid",0.00011193
+"DeoxyCer(m18:1/24:0)",0.00010828
+"Dodecanoylcarnitine",0.00010251
+"Adenine",0.0001017
+"LysoPC(16:0)",0.00010085
+"Plasmalogen(p18:0/22:6)",9.9703e-05
+"L-Valine",9.7418e-05
+"GM3(d18:1/16:0)",9.5074e-05
+"SM(d18:1/24:1)",9.4823e-05
+"L-Methionine",9.416e-05
+"L-Cystine",9.4135e-05
+"Homogentisic acid",8.9587e-05
+"2-Arachidonylglycerol",8.9228e-05
+"Ceramide(d18:1/26:0)",8.7546e-05
+"3-Phosphoglyceric acid",8.6235e-05
+"Propionylcarnitine",8.5977e-05
+"Azelaic acid",8.3873e-05
+"N-alpha-Acetylarginine",8.1297e-05
+"Malondialdehyde",7.5516e-05
+"4-Hydroxyphenylpyruvic acid",7.3135e-05
+"Gamma-Aminobutyric acid",7.1335e-05
+"Ceramide(d18:1/22:2)",7.0918e-05
+"Chenodeoxyglycocholic acid",7.0871e-05
+"L-Glutarylcarnitine",7.0168e-05
+"Methylsuccinic Acid",6.988e-05
+"Quinolinic Acid",6.7656e-05
+"PC(20:4/P-16:0)",6.6299e-05
+"Methionine sulfoxide",6.4352e-05
+"Shikimate-3-phosphate",6.4269e-05
+"Ceramide(d18:1/20:1 OH)",6.3383e-05
+"SM(d18:1/16:1 OH)",6.2549e-05
+"Ceramide(d18:1/24:2)",6.2143e-05
+"Taurocholic acid",6.102e-05
+"Succinic acid",6.0712e-05
+"SM(d18:1/25:0) or SM(d18:1/24:1 OH)",6.0251e-05
+"Acetylcholine",5.8496e-05
+"14,15-Epoxy-5,8,11-eicosatrienoic acid",4.9321e-05
+"Selenomethionine",4.9021e-05
+"Cytosine",4.8585e-05
+"DeoxyCer(m18:1/16:0)",4.7601e-05
+"Inosine monophosphate",4.6931e-05
+"Anandamide",4.468e-05
+"PI(40:5)",4.3877e-05
+"Cholestenone",4.3127e-05
+"Citrulline",4.3082e-05
+"Uric acid",3.8873e-05
+"SM(d18:1/24:0)",3.828e-05
+"Ornithine",3.7704e-05
+"Urea",3.6929e-05
+"Ureidopropionic acid",3.685e-05
+"Cytidine diphosphate",3.6249e-05
+"L-Aspartic acid",3.5623e-05
+"PC(32:2)",3.2499e-05
+"Deoxythymidine diphosphate",3.1782e-05
+"BMP(16:0/16:0)",2.9574e-05
+"Creatine",2.9158e-05
+"Palmitoylethanolamide",2.8943e-05
+"Niacinamide",2.8193e-05
+"BMP(18:1/18:2)",2.6261e-05
+"LysoPC(24:1)",2.4671e-05
+"Oxaloacetic acid",2.1003e-05
+"Ceramide(d18:1/20:1)",1.9696e-05
+"Glycine",1.9101e-05
+"Deoxyguanosine",1.77e-05
+"AICAR",1.6237e-05
+"CL(18:2/18:2/18:2/22:6)",1.6155e-05
+"2-Octenoylcarnitine",1.5824e-05
+"PG(32:2)",1.4521e-05
+"2,3-Diphosphoglyceric acid",1.4156e-05
+"SM(d18:1/20:1 OH)",1.388e-05
+"Ceramide(d18:1/24:2 OH)",1.2224e-05
+"CL(18:2/18:2/18:2/18:2)",1.1044e-05
+"SM(d18:1/22:0)",1.0952e-05
+"PC(16:0/18:1)",8.6192e-06
+"2-Deoxyguanosine 5-monophosphate",8.5723e-06
+"Allantoin",6.7811e-06
+"4-Pyridoxic acid",6.5295e-06
+"Docosahexaenoic acid",4.0439e-06
+"Pseudouridine",3.1568e-06
+"BMP(18:1/18:0)",2.5204e-06
+"THC 18:1/24:1",2.3616e-06
+"Uracil",2.0854e-06
+"1,25-Dihydroxyvitamin D3",1.9947e-06
+"N-oleoylethanolamine",-1.5105e-06
+"Xanthosine",-1.7766e-06
+"Pregnenolone sulfate",-2.2672e-06
+"N-acetylserine",-2.5572e-06
+"PI(36:2)",-2.7588e-06
+"3-Hydroxydodecanoylcarnitine",-4.7322e-06
+"BMP(18:1/18:1)",-5.3391e-06
+"PI(38:4)",-6.9188e-06
+"DeoxydihydroCer(m18:0/18:0)",-7.863e-06
+"Biotin",-8.7344e-06
+"Cytidine",-9.1001e-06
+"BMP(18:1/16:0)",-9.6503e-06
+"CL(18:2/18:2/18:2/18:1)",-9.7817e-06
+"Inosine",-1.0174e-05
+"L-Phenylalanine",-1.126e-05
+"11,12-Epoxyeicosatrienoic acid",-1.1498e-05
+"DeoxydihydroCer(m18:0/24:1)",-1.2943e-05
+"Dodecenoylcarnitine",-1.3324e-05
+"Alpha-ketoisovaleric acid",-1.3373e-05
+"SM(d18:1/26:0)",-1.3426e-05
+"Ceramide(d18:1/26:0 OH)",-1.4158e-05
+"Pipecolic acid",-1.4779e-05
+"Hypoxanthine",-1.6464e-05
+"L-Proline",-1.7325e-05
+"CL(18:2/18:1/18:1/20:4)",-1.9274e-05
+"Dopamine",-1.9883e-05
+"PE (18:0/18:0)",-2.2789e-05
+"1-Methylhistidine",-2.3639e-05
+"Arachidonyl carnitine",-2.4031e-05
+"SM(d18:1/24:0 OH)",-2.411e-05
+"Lanosterin",-2.416e-05
+"Ceramide(d18:1/16:1)",-2.4297e-05
+"Arachidonic Acid",-2.4464e-05
+"Prostaglandin E2",-2.5802e-05
+"12-HETE",-2.6219e-05
+"MHC(18:1/16:0)",-2.6305e-05
+"S-Adenosylhomocysteine",-2.7713e-05
+"CL(18:2/18:2/18:2/20:4)",-2.8404e-05
+"Ceramide(d18:1/25:0)",-2.8412e-05
+"L-leucine",-2.8521e-05
+"Pyroglutamic acid",-2.9518e-05
+"GD3(d18:1/16:0)",-2.9551e-05
+"THC 18:1/22:0",-3.109e-05
+"Cysteine-S-sulfate",-3.152e-05
+"Ceramide(d18:1/16:2 OH)",-3.1785e-05
+"Vitamin D3",-3.1887e-05
+"Sphingosine 1-phosphate",-3.3136e-05
+"MHC(18:2/16:0)",-3.3953e-05
+"Cholic acid",-3.418e-05
+"SM(d18:1/16:1)",-3.5344e-05
+"Pyruvic acid",-3.9112e-05
+"N-Acetyl-glucosamine 1-phosphate",-3.9384e-05
+"Ceramide(d18:1/18:0 OH)",-4.0073e-05
+"8,9-Epoxyeicosatrienoic acid",-4.0941e-05
+"SM(d18:1/18:0 OH)",-4.5304e-05
+"Octanoylcarnitine",-4.5616e-05
+"Fumaric acid",-4.7773e-05
+"L-Histidine",-4.8401e-05
+"Cytidine triphosphate",-4.8476e-05
+"L-Lactic acid",-4.8578e-05
+"GD3(d18:1/16:1)",-4.9554e-05
+"PI(38:3)",-5.0007e-05
+"Cyclic adenosine monophosphate",-5.0154e-05
+"Sebacic acid",-5.0402e-05
+"Malic acid",-5.0444e-05
+"PC(36:0)",-5.1719e-05
+"2-Hydroxy-3-methylbutyric acid",-5.2788e-05
+"Hexose Diphosphate Pool",-5.344e-05
+"4-Hydroxybenzoic acid",-5.4614e-05
+"DHC(18:1/22:0)",-5.5749e-05
+"PS(34:1)",-5.6318e-05
+"Cinnamoylglycine",-5.7001e-05
+"Ceramide(d18:1/20:2 OH)",-5.7738e-05
+"Ceramide(d18:1/18:0)",-5.8323e-05
+"3-Hydroxyoleoylcarnitine",-5.8487e-05
+"PG(36:3)",-5.8567e-05
+"L-Serine",-6.0254e-05
+"SM(d18:1/23:0) or SM(d18:1/22:1 OH)",-6.0655e-05
+"Orotidine monophosphate",-6.0971e-05
+"Ergothioneine",-6.1061e-05
+"3-Hydroxyhexanoylcarnitine",-6.2322e-05
+"SM(d18:1/20:2)",-6.2358e-05
+"Adenosine triphosphate",-6.303e-05
+"PE(36:2)",-6.3944e-05
+"Malonylcarnitine",-6.4268e-05
+"20-Hydroxyeicosatetraenoic acid",-6.4703e-05
+"Lathosterol",-6.5255e-05
+"24,25-Dihydrolanosterol",-6.5491e-05
+"L-Tryptophan",-6.5975e-05
+"Oxalic acid",-6.7557e-05
+"DeoxyCer(m18:1/18:0)",-6.84e-05
+"PI(34:1)",-6.8537e-05
+"5-Methyltetrahydrofolic acid",-7.0104e-05
+"PC(18:0/18:2)",-7.0641e-05
+"SM(d18:1/26:2)",-7.1951e-05
+"Oleoylcarnitine",-7.2279e-05
+"Homocitrulline",-7.243e-05
+"L-Glutamic acid",-7.298e-05
+"L-Palmitoylcarnitine",-7.3207e-05
+"Citramalic acid",-7.6476e-05
+"1-Methyladenine",-7.6492e-05
+"Nicotinic acid",-7.6866e-05
+"PC(38:5)",-7.702e-05
+"2-Hydroxyglutarate",-7.7293e-05
+"Ceramide(d18:1/26:1 OH)",-7.789e-05
+"Ceramide(d18:1/16:1 OH)",-7.8866e-05
+"L-Acetylcarnitine",-7.8982e-05
+"Malonic acid",-7.9523e-05
+"PA(16:0/16:0)",-8.0398e-05
+"PA(16:0/16:1)",-8.1643e-05
+"Dimethylglycine",-8.3762e-05
+"SM(d18:1/26:1 OH)",-8.4199e-05
+"Plasmalogen(p16:0/20:4)",-8.4266e-05
+"Gluconic acid",-8.7292e-05
+"Glyoxylic acid",-8.735e-05
+"SM(d18:1/22:2 OH)",-8.9745e-05
+"Deoxyadenosine monophosphate",-9.0393e-05
+"Alanine",-9.2847e-05
+"Retinol",-9.3266e-05
+"2-Pyrocatechuic acid",-9.3614e-05
+"Ceramide(d18:1/22:2 OH)",-9.4351e-05
+"Ketoleucine",-9.6003e-05
+"Ceramide(d18:1/16:0 OH)",-9.7039e-05
+"Glucaric acid",-9.7411e-05
+"SM(d18:1/22:0 OH)",-9.7675e-05
+"BMP(18:1/16:1)",-9.8567e-05
+"PI(38:5)",-9.9923e-05
+"Citric_Isocitric",-0.0001008
+"CL(18:2/18:2/18:2/16:1)",-0.00010106
+"3-Hydroxyhexadecanoylcarnitine",-0.00010218
+"Deoxyadenosine diphosphate",-0.00010414
+"Plasmalogen(20:4/p18:0)",-0.00010495
+"PC(20:5/P-16:0)",-0.00010591
+"Dehydroascorbic acid",-0.0001063
+"cis-aconitic acid",-0.000107
+"Ceramide(d18:1/22:1)",-0.00010703
+"Allantoic acid",-0.0001072
+"Aldosterone",-0.00010825
+"THC 18:1/16:0",-0.0001083
+"N-Acetylornithine",-0.00010833
+"7-Dehydrocholesterol",-0.00010889
+"Thyroxine",-0.00010958
+"Myoinositol",-0.00010985
+"PI(36:4)",-0.00010991
+"PI(34:0)",-0.00011024
+"Ceramide(d18:1/16:0)",-0.00011094
+"3-methylphenylacetic acid",-0.00011118
+"Hippuric acid",-0.00011285
+"Homovanillic acid",-0.00011322
+"Tryptophol",-0.00011347
+"SM(d18:1/18:1 OH)",-0.0001136
+"THC 18:1/18:0",-0.00011396
+"Choline",-0.00011553
+"PC(16:0/18:2)",-0.00011663
+"CL(18:2/18:2/18:1/18:1)",-0.0001208
+"Ceramide(d18:1/20:2)",-0.00012141
+"Carnosine",-0.0001215
+"Gluconolactone",-0.00012191
+"DeoxydihydroCer(m18:0/16:0)",-0.00012306
+"PC(32:1)",-0.00012356
+"PG(32:1)",-0.00012442
+"Plasmalogen(22:6/p16:0)",-0.00012603
+"9-Decenoylcarnitine",-0.00012871
+"L-Asparagine",-0.00012874
+"Tetranor-PGFM",-0.00013
+"Acetoacetic acid",-0.00013027
+"Octadecanoylcarnitine",-0.00013047
+"SM(d18:1/16:0)",-0.00013071
+"Myristoylcarnitine",-0.00013183
+"GM3(d18:1/16:1)",-0.000135
+"1-Pyrroline-5-carboxylic acid",-0.00013524
+"beta-Alanine",-0.00013624
+"Purine",-0.00013687
+"Carbamoylphosphate",-0.00013875
+"PC(40:6)",-0.00014294
+"5-Methylthioadenosine",-0.0001439
+"CL(18:2/18:2/16:1/16:1)",-0.00014476
+"DeoxyCer(m18:1/24:1)",-0.00014532
+"11,12-DiHETrE",-0.00014565
+"L-Kynurenine",-0.00014605
+"Vitamin K2",-0.00014722
+"Tetranor-PGEM",-0.00014744
+"Glycerophosphocholine",-0.00014943
+"Ceramide(d18:1/20:0 OH)",-0.0001519
+"Creatinine",-0.00015365
+"Glucosamine",-0.00015433
+"Ceramide(d18:1/18:2)",-0.000155
+"8-HETE",-0.00015517
+"Sphinganine(d18:0)",-0.00015538
+"p-Aminobenzoic acid",-0.0001557
+"SM(d18:1/16:0 OH)",-0.00015587
+"9-HETE",-0.00015607
+"Spermine",-0.0001584
+"Nicotinamide N-oxide",-0.00015866
+"DeoxyCer(m18:1/22:0)",-0.00016087
+"Cysteamine",-0.00016147
+"Glycolic acid",-0.00016214
+"Neopterin",-0.00016249
+"Ceramide(d18:1/18:1 OH)",-0.00016373
+"Desmosterol",-0.00016463
+"Aminoadipic acid",-0.00016473
+"24,25-Epoxycholesterol",-0.00016477
+"Taurodeoxycholic acid Pool",-0.00016662
+"Orotic acid",-0.00016665
+"Prostaglandin D2",-0.00016679
+"Lipoic acid",-0.0001705
+"SM(d18:1/20:0 OH)",-0.00017058
+"Ceramide(d18:1/22:0 OH)",-0.00017239
+"SM(d18:1/24:2 OH)",-0.00017381
+"Androsterone sulfate",-0.0001741
+"Trimethylamine-N-oxide",-0.00017488
+"Dehydroepiandrosterone sulfate",-0.00017794
+"Guanosine",-0.0001797
+"SM(d18:1/26:2 OH)",-0.00017993
+"Adipic acid",-0.0001807
+"Adenosine monophosphate",-0.00018085
+"Adenosine",-0.00018184
+"D-Glyceraldehyde 3-phosphate",-0.00018214
+"Gamma-glutamyl-Alanine",-0.00018495
+"1-Methyladenosine",-0.00018652
+"6-Phosphogluconic acid",-0.00018703
+"13S-hydroxyoctadecadienoic acid",-0.00018722
+"Hydroxyisocaproic acid",-0.0001897
+"PG(36:1)",-0.00019295
+"SM(d18:1/22:2)",-0.00019586
+"Pyridoxal 5-phosphate",-0.00019632
+"Adipoylcarnitine",-0.00019864
+"5-HETE",-0.00019982
+"Hexanoylcarnitine",-0.00020019
+"LysoPC(18:0)",-0.00020093
+"PA(18:1/18:1)",-0.00020302
+"MHPG-sulfate",-0.00020675
+"SM(d18:1/18:0)",-0.00021108
+"Phenyllactic acid",-0.00021342
+"Cholesteryl sulfate",-0.00021417
+"GM3(d18:1/24:1)",-0.00021591
+"3-Hydroxy-cis-5-tetradecenoylcarnitine",-0.0002161
+"Arginine",-0.00021755
+"DL-2-Aminooctanoic acid",-0.00021959
+"Deoxycholic acid",-0.00022396
+"1-Methylnicotinamide",-0.00022471
+"Linoleylcarnitine",-0.00022482
+"Suberylcarnitine",-0.00022819
+"Pimelylcarnitine",-0.00023006
+"N-methylphenethylamine",-0.00023124
+"N-Acetylaspartylglutamic acid",-0.00023224
+"Benzoic acid",-0.00023279
+"11-HETE",-0.00023293
+"PC(22:6/P-18:0)",-0.00023341
+"Hydroxyproline",-0.00023391
+"N-Acetyl-L-aspartic acid",-0.00023406
+"14,15-DHET",-0.00023809
+"SM(d18:1/20:0)",-0.00023861
+"Xanthosine monophosphate",-0.00024519
+"N-acetylputrescine",-0.00024796
+"GM3(d18:1/18:1)",-0.00024953
+"Hexose Pool",-0.00025051
+"PE(32:1)",-0.00025413
+"Hypotaurine",-0.00025636
+"PC(36:1)",-0.00025906
+"PA(18:0/16:1)",-0.00026168
+"Alpha-Tocopherol",-0.0002619
+"PA(18:0/18:1)",-0.00026222
+"3-Hydroxyhexadecenoylcarnitine",-0.00026286
+"2-Methylcitric acid",-0.0002637
+"3-Methylthiopropionic acid",-0.0002659
+"PE(32:2)",-0.00026715
+"PA(16:1/18:1)",-0.00026857
+"Inosine diphosphate",-0.00026953
+"Taurine",-0.00027358
+"Eicosapentaenoic acid",-0.00027597
+"Guanosine monophosphate",-0.00029634
+"Uridine 5-monophosphate",-0.00029797
+"PC(16:0/22:6)",-0.00030854
+"PA(16:1/16:1)",-0.00031926
+"Histamine",-0.00033898
+"SM(d18:1/22:1)",-0.00037877
+"Cholesterol",-0.00038204
+"DeoxydihydroCer(m18:0/22:0)",-0.00040058
+"Kynurenic acid",-0.00044458

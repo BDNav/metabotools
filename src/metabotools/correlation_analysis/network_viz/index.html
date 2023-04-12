@@ -1,0 +1,678 @@
+
+<!-- Direct reference -->
+
+
+<!doctype html>
+<html>
+<head>
+  <title>Naviaux Lab Correlation Network Explorer</title>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
+  
+  <script src="https://unpkg.com/neo4j-driver"></script>
+  <style type="text/css">
+    #mynetwork {
+      width: 1200px;
+      height: 800px;
+      border: 1px solid lightgray;
+    }
+  </style>
+</head>
+<body onload="onLoadFunction()">
+<center>
+<p>
+  <h1>Naviaux Lab Correlation Network Explorer</h1>
+</p>
+
+<div id="mynetwork"></div>
+
+<!-- <input type="button" onclick="clearNetwork()" value="clearNetwork"> <br /> -->
+<!-- <input type="button" onclick="queryInPathway()" value="In Pathway"> <br /> -->
+<!-- <input type="button" onclick="queryOutOfPathway()" value="Out of Pathway"> <br /> -->
+<!-- <input type="button" onclick="queryToxTox()" value="Tox to Tox"> <br /> -->
+<!-- <input type="button" onclick="queryEndoEndo()" value="Endo to Endo"> <br /> -->
+<!-- <input type="button" onclick="queryToxEndo()" value="Tox to Endo"> <br /> -->
+
+<table>
+<tr>
+<td colspan=4>
+<div class="dropdown">
+  <label for="studies"><b>Choose a study:</b></label>
+
+<select name="studies" id="studies" onChange="updateStudy(this.value)">
+</select><b>  Total Stats:</b> Chemicals: <b id="studyChemicals">loading... </b> Edges:<b id="studyEdges"> loading...</b>
+</div>
+</td>
+</tr>
+<tr>
+    <td>
+        <input id="slide" type="range" min="0" max="100" step="1" value="0" onchange="updateSlider(this.value)">
+    </td>
+    <td>
+        <input id="qValueSlide" type="range" min="1" max="30" step="1" value="30" onchange="updateQSlider(this.value)">
+    </td>
+    <td>
+        <input id="pValueSlide" type="range" min="1" max="30" step="1" value="30" onchange="updatePSlider(this.value)">
+    </td>
+    <!-- <td> -->
+        <!-- <input id="fdrSlide" type="range" min="1" max="30" step="1" value="30" onchange="updateFSlider(this.value)"> -->
+    <!-- </td> -->
+    <td>
+        <input id="limitSlide" type="range" min="1" max="600" step="1" value="100" onchange="updateLimitSlider(this.value)">
+    </td>
+</tr>
+<tr>
+    <td>
+        <div id="sliderDiv">r > 0</div>
+    </td>
+    <td>
+        <div id="qSliderDiv">Q < 1</div>
+    </td>
+    <td>
+        <div id="pSliderDiv">p < 1</div>
+    </td>
+    <!-- <td> -->
+        <!-- <div id="fSliderDiv">fdr < 1</div> -->
+    <!-- </td> -->
+    <td>
+        <div id="limitSliderDiv">limit = 100</div>
+    </td>
+</tr>
+</table>
+
+
+<form onchange="setQueryStats()">
+        Pathways: 
+        <input type="radio" name="pathway" value="all" checked> All
+        <input type="radio" name="pathway" value="in"> In
+        <input type="radio" name="pathway" value="out"> Out
+</form>
+
+<form onchange="setQueryStats()">
+        <input type="radio" name="tox" value="all" checked> All
+        <input type="radio" name="tox" value="endoendo"> Endo-Endo
+        <input type="radio" name="tox" value="toxendo"> Tox-Endo
+        <input type="radio" name="tox" value="toxtox"> Tox-Tox
+</form>
+
+<br />
+<!-- <div id="queryStats"></div> -->
+Current query will have <b id="queryStats"></b> edges
+<input type="button" id="btn" value="Show Network"> <br />
+
+<script type="text/javascript">
+
+
+const btn = document.querySelector('#btn');
+// handle click button
+btn.onclick = async function () {
+    let rbs = document.querySelectorAll('input[name="pathway"]');
+    let pathway;
+    for (const rb of rbs) {
+        if (rb.checked) {
+            pathway = rb.value;
+            break;
+        }
+    }
+    
+    rbs = document.querySelectorAll('input[name="tox"]');
+    let tox;
+    for (const rb of rbs) {
+        if (rb.checked) {
+            tox = rb.value;
+            break;
+        }
+    }
+    
+    clearNetwork();
+    let query;
+    //alert(study);
+    switch(tox) {
+    case "all":
+        query = 'MATCH (n)-[r {project: $study}]-(m) '
+        break;
+    case "endoendo":
+        query = 'MATCH (n: Chemical {type: "Endogenous"})-[r {project: $study}]-(m: Chemical {type: "Endogenous"}) '
+        break;
+    case "toxendo":
+        query = 'MATCH (n: Chemical {type: "Exogenous"})-[r {project: $study}]-(m: Chemical {type: "Endogenous"}) '
+        break;
+    case "toxtox":
+        query = 'MATCH (n: Chemical {type: "Exogenous"})-[r {project: $study}]-(m: Chemical {type: "Exogenous"}) '
+        break;
+    }
+    
+    switch(pathway) {
+    case "all":
+        query+= 'WHERE '
+        break;
+    case "in":
+        query += 'WHERE (n.pathway=m.pathway) AND '
+        break;
+    case "out":
+        query += 'WHERE (n.pathway<>m.pathway) AND '
+        break;
+    }
+    
+    //query += '(r.weight>$weightParam) RETURN distinct n,r,m'
+    query += '(r.weight>$weightParam) AND (r.q<$qCutoff) AND (r.p<$pCutoff) and (r.fdr<$fdrCutoff) RETURN distinct n,r,m ORDER BY r.q LIMIT ' + parseInt(limitCutoff*2, 10)
+    console.log(query)
+    //alert(tox);
+    //alert(query);
+    //let query = 'MATCH (n: Chemical {type: "Endogenous"})-[r]-(m: Chemical {type: "Endogenous"}) WHERE (r.weight>$weightParam) RETURN distinct n,r,m';
+    
+    //let params = {weightParam:edgeWeight}
+    let params = {study: study, weightParam: edgeWeight, qCutoff: qCutoff, pCutoff: pCutoff, fdrCutoff: fdrCutoff}
+    
+    res = await queryNeo4j(query, params);
+    loadNewNetwork(res.nodes, res.edges);
+};
+
+async function buildCountQuery() {
+    let rbs = document.querySelectorAll('input[name="pathway"]');
+    let pathway;
+    for (const rb of rbs) {
+        if (rb.checked) {
+            pathway = rb.value;
+            break;
+        }
+    }
+    
+    rbs = document.querySelectorAll('input[name="tox"]');
+    let tox;
+    for (const rb of rbs) {
+        if (rb.checked) {
+            tox = rb.value;
+            break;
+        }
+    }
+    
+    let query;
+    //alert(study);
+    switch(tox) {
+    case "all":
+        query = 'MATCH (n)-[r {project: $study}]-(m) '
+        break;
+    case "endoendo":
+        query = 'MATCH (n: Chemical {type: "Endogenous"})-[r {project: $study}]-(m: Chemical {type: "Endogenous"}) '
+        break;
+    case "toxendo":
+        query = 'MATCH (n: Chemical {type: "Exogenous"})-[r {project: $study}]-(m: Chemical {type: "Endogenous"}) '
+        break;
+    case "toxtox":
+        query = 'MATCH (n: Chemical {type: "Exogenous"})-[r {project: $study}]-(m: Chemical {type: "Exogenous"}) '
+        break;
+    }
+    
+    switch(pathway) {
+    case "all":
+        query+= 'WHERE '
+        break;
+    case "in":
+        query += 'WHERE (n.pathway=m.pathway) AND '
+        break;
+    case "out":
+        query += 'WHERE (n.pathway<>m.pathway) AND '
+        break;
+    }
+    
+    //query += '(r.weight>$weightParam) RETURN distinct n,r,m'
+    query += '(r.weight>$weightParam) AND (r.q<$qCutoff) AND (r.p<$pCutoff) and (r.fdr<$fdrCutoff) RETURN count(distinct(r)) as result'
+    //console.log(query)
+    //alert(tox);
+    //alert(query);
+    //let query = 'MATCH (n: Chemical {type: "Endogenous"})-[r]-(m: Chemical {type: "Endogenous"}) WHERE (r.weight>$weightParam) RETURN distinct n,r,m';
+    
+    //let params = {weightParam:edgeWeight}
+    let params = {study:study, weightParam:edgeWeight, qCutoff:qCutoff, pCutoff:pCutoff, fdrCutoff:fdrCutoff}
+    
+    res = await countQuery(query, params);
+   
+    return res[0];
+    
+}
+
+async function studyInfoQuery(type, studyName) {
+    
+    let query;
+    let params;
+    console.log('study name:' + studyName);
+    
+    switch(type) {
+    case "nodes":
+        // all study nodes
+        query = "match (c:Chemical)-[r:CORRELATES_WITH {project:$study}]-(c2:Chemical) return count(distinct(c)) as result";
+        params = {study:studyName};
+        res = await countQuery(query, params);
+        return res[0]
+        break;
+    case "connections":
+         // all study connections
+        query = "match (c:Chemical)-[r:CORRELATES_WITH {project:$study}]-(c2:Chemical) return count(distinct(r)) as result";
+        params = {study:studyName};
+        res = await countQuery(query, params);
+        return res[0]
+        break;
+    case "studies":
+        //all studies
+        query = "match ()-[r:CORRELATES_WITH]-() return distinct r.project as result";
+        params = {};
+        res = await countQuery(query, params);
+        return res
+        break;
+    }
+    
+    //console.log(res);
+    //return res;
+}
+
+
+async function updateStudy(studyValue) {
+    study = studyValue;
+    console.log('study value:' + studyValue);
+    console.log('study value:' + studyValue);
+    console.log('study value:' + studyValue);
+    console.log('study value:' + studyValue);
+    console.log('study value:' + studyValue);
+    
+    studyChemicals.innerHTML = "loading...";
+    studyEdges.innerHTML = "loading...";
+    
+    let nodes = await studyInfoQuery('nodes', studyValue);
+    let cnx = await studyInfoQuery('connections', studyValue);
+    let studies = await studyInfoQuery('studies', '');
+    
+    studyChemicals = document.getElementById("studyChemicals")
+    studyEdges = document.getElementById("studyEdges")
+    studyChemicals.innerHTML = nodes;
+    studyEdges.innerHTML = cnx;
+    
+    setQueryStats();
+    
+}
+
+async function setQueryStats() {
+    let curQuery = await buildCountQuery();
+    console.log('quyer: ' + curQuery + 'limit: ' + limitCutoff);
+    console.log(curQuery);
+    console.log(limitCutoff);
+    queryStats = document.getElementById("queryStats")
+    if (curQuery>parseInt(limitCutoff,10)) {
+        queryStats.innerHTML = limitCutoff;
+    } else {
+        queryStats.innerHTML = curQuery;
+    }
+}
+
+async function onLoadFunction(){
+    let studies = await studyInfoQuery('studies', '');
+    studyOptions = document.getElementById("studies")
+    for (i=0; i<studies.length; i++) {
+        studyOptions.innerHTML+="<option value=" + studies[i].replace(/\s+/g, '') + ">" + studies[i] + "</option>";
+        console.log(studies[i]);
+    }
+    study = studies[0];
+    
+    let nodes = await studyInfoQuery('nodes', study);
+    let cnx = await studyInfoQuery('connections', study);
+    studyChemicals = document.getElementById("studyChemicals")
+    studyEdges = document.getElementById("studyEdges")
+    studyChemicals.innerHTML = nodes;
+    studyEdges.innerHTML = cnx;
+    setQueryStats();
+    
+    await getRanges();
+    
+}
+
+async function buildRangeQuery(param){
+    let query;
+    let params = {};
+    
+    query = 'MATCH ()-[r:CORRELATES_WITH]-() return MAX(r.' + param + ') as result';
+    max = await countQuery(query, params);
+    
+    query = 'MATCH ()-[r:CORRELATES_WITH]-() return MIN(r.' + param + ') as result';
+    min = await countQuery(query, params);
+    
+    return {'min':min[0], 'max':max[0]};
+}
+
+async function getRanges() {
+    minP = 0;
+    maxP = 1;
+    
+    let pRange = await buildRangeQuery('p');
+    let qRange = await buildRangeQuery('q');
+    let rRange = await buildRangeQuery('weight');
+    let fdrRange = await buildRangeQuery('fdr');
+    console.log(pRange);
+    console.log(qRange);
+    console.log(rRange);
+    console.log(fdrRange);
+    
+}
+
+function updateSlider(slideAmount) {
+    
+    edgeWeight = slideAmount/100;
+    console.log(edgeWeight);
+    var sliderDiv = document.getElementById("sliderDiv");
+    sliderDiv.innerHTML = "r > " + edgeWeight;
+    setQueryStats();
+};
+
+function updatePSlider(slideAmount) {
+    var dif = slideAmount-30;
+    pCutoff = Math.pow(10,dif);
+    console.log(pCutoff);
+    var pSliderDiv = document.getElementById("pSliderDiv");
+    pSliderDiv.innerHTML = "p < " + pCutoff.toExponential(0);
+    setQueryStats();
+};
+
+function updateQSlider(slideAmount) {
+    console.log(slideAmount);
+    console.log(slideAmount-30);
+    var dif = slideAmount-30;
+    qCutoff = Math.pow(10,dif);
+    console.log(qCutoff);
+    var qSliderDiv = document.getElementById("qSliderDiv");
+    qSliderDiv.innerHTML = "q < " + qCutoff.toExponential(0);
+    setQueryStats();
+};
+
+function updateFSlider(slideAmount) {
+    var dif = slideAmount-30;
+    fdrCutoff = Math.pow(10,dif);
+    
+    console.log(fdrCutoff);
+    var fSliderDiv = document.getElementById("fSliderDiv");
+    fSliderDiv.innerHTML = "fdr < " + fdrCutoff.toExponential(0);
+    setQueryStats();
+};
+
+function updateLimitSlider(slideAmount) {
+    limitCutoff = slideAmount;
+    var limitSliderDiv = document.getElementById("limitSliderDiv");
+    limitSliderDiv.innerHTML = "limit = " + limitCutoff;
+    setQueryStats();
+};
+
+function clearNetwork() {
+     if (network !== null) {
+            network.destroy();
+            network = null;
+        }
+        startNetwork();
+    
+};
+
+function startNetwork() {
+    nodes = new vis.DataSet([
+        <!-- {id: 1, label: 'Node 1'} -->
+      ]);
+
+  // create an array with edges
+      edges = new vis.DataSet([
+       
+      ]);
+
+  // create a network
+  container = document.getElementById('mynetwork');
+  data = {
+    nodes: nodes,
+    edges: edges
+  };
+  options = {
+    nodes: {
+        shape: 'dot',
+        size: 10,
+        font: {
+            size: 20
+        },
+        borderWidth: 2,
+        shadow:true
+    },
+    edges: {
+        width: 2,
+        shadow:true
+    }};
+  network = new vis.Network(container, data, options);
+}
+
+
+async function queryInPathway() {
+    let query = 'Match (n)-[r]-(m) WHERE (n.pathway=m.pathway) AND (r.weight>$weightParam) RETURN distinct n,r,m';
+    let params = {weightParam:edgeWeight}
+    res = await queryNeo4j(query, params);
+    loadNewNetwork(res.nodes, res.edges);
+}
+
+async function queryOutOfPathway() {
+    let query = 'Match (n)-[r]-(m) WHERE (n.pathway<>m.pathway) AND (r.weight>$weightParam) RETURN distinct n,r,m';
+    let params = {weightParam:edgeWeight}
+    res = await queryNeo4j(query, params);
+    loadNewNetwork(res.nodes, res.edges);
+}
+
+async function queryToxTox() {
+    let query = 'MATCH (n: Chemical {type: "Exogenous"})-[r]-(m: Chemical {type: "Exogenous"}) WHERE (r.weight>$weightParam) RETURN distinct n,r,m';
+    let params = {weightParam:edgeWeight}
+    res = await queryNeo4j(query, params);
+    loadNewNetwork(res.nodes, res.edges);
+}
+
+async function queryToxEndo() {
+    let query = 'MATCH (n: Chemical {type: "Exogenous"})-[r]-(m: Chemical {type: "Endogenous"}) WHERE (r.weight>$weightParam) RETURN distinct n,r,m';
+    let params = {weightParam:edgeWeight}
+    res = await queryNeo4j(query, params);
+    loadNewNetwork(res.nodes, res.edges);
+}
+
+async function queryEndoEndo() {
+    let query = 'MATCH (n: Chemical {type: "Endogenous"})-[r]-(m: Chemical {type: "Endogenous"}) WHERE (r.weight>$weightParam) RETURN distinct n,r,m';
+    let params = {weightParam:edgeWeight}
+    res = await queryNeo4j(query, params);
+    loadNewNetwork(res.nodes, res.edges);
+}
+
+async function loadNewNetwork(newNodes, newEdges) {
+    newNodes.forEach(function (node) {
+        //console.log(node);
+        let shape = 'dot';
+        if (node['properties']['type']=='Exogenous') {
+            shape = 'triangle';
+        }
+        let title = "<b>Pathway: </b>" + node['properties']['pathway'];
+        //nodes.add({'id':node['identity']['low'], 'label':node['properties']['name'], group:node['properties']['group'], title:JSON.stringify(node.properties), value:10, size:10, shape:shape})
+        nodes.add({'id':node['identity']['low'], 'label':node['properties']['name'], group:node['properties']['group'], title:title, value:10, size:10, shape:shape})
+        
+    });
+    
+    newEdges.forEach(function (edge) {
+        //console.log(edge);
+        let name = "W: " + parseFloat(edge['properties']['weight']);
+        my_prop = ""
+        let stats = ['p','r','q','fdr'];
+        stats.forEach(formatLabel);
+        function formatLabel(property) {
+            if (property=='r') {
+                my_prop+="<b>" + property + ": </b>" + edge.properties[property].toFixed(2) + '<br>';
+            } else {
+                my_prop+="<b>" + property + ": </b>" + edge.properties[property].toExponential(0) + '<br>';
+            }
+        }
+
+        /*for (const property in edge.properties) {
+          console.log(property, edge.properties[property]);
+          my_prop+="<b>" + property + ": </b>" + edge.properties[property].toFixed(2) + '<br>';
+        }*/
+        
+        <!-- edges.add({id: edge['identity']['low'], from:edge['start']['low'], label: name, value:edge['properties']['weight']*10, to:edge['end']['low'], title:JSON.stringify(edge.properties)}) -->
+        edges.add({id: edge['identity']['low'], from:edge['start']['low'], value:edge['properties']['weight']*10, to:edge['end']['low'], title:my_prop}) // removing edge labels
+        
+    });
+    
+    if (newNodes.length==0) {
+        nodes.add({'id':1, 'label':'NO RESULTS', color:'grey', value:100, size:100, shape:'box'})
+    }
+}
+
+
+async function countQuery(query, params) {
+    //let uri = "bolt://localhost:7687";
+    //let user = "neo4j";
+    //let password = "metcorrdb";
+    
+    let uri = "neo4j+s://61aa2941.databases.neo4j.io";
+    let user = "neo4j";
+    let password = "PrisLIwERSM1N-Qv0ghQk5kgicsKorOnJrZbVjUmDSo";
+    
+    const driver = neo4j.driver(uri, neo4j.auth.basic(user, password))
+    <!-- const session = driver.session({"database":"metcorrdb2"}) -->
+    const session = driver.session()
+    let out = [];
+    await session
+      .run(query, params)
+      .then(result => {
+        result.records.forEach(record => {
+          //console.log(record.get('result'));
+          out.push(record.get('result'));
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+      .then(() => session.close())
+    return out
+    
+}
+
+async function queryNeo4j(query, params) {
+
+    // Query the dB and return unique nodes and edges
+    // NOTE those node and edges still have to be parsed into correct format for nodejs
+
+    //let uri = "bolt://localhost:7687";
+    //let user = "neo4j";
+    //let password = "metcorrdb";
+    
+    let uri = "neo4j+s://61aa2941.databases.neo4j.io";
+    let user = "neo4j";
+    let password = "PrisLIwERSM1N-Qv0ghQk5kgicsKorOnJrZbVjUmDSo";
+    
+    const driver = neo4j.driver(uri, neo4j.auth.basic(user, password))
+    <!-- const session = driver.session({"database":"metcorrdb2"}) -->
+    const session = driver.session()
+    const weight = 0.9
+    
+    let myNodes = [];
+    let myNodeIds = [];
+    let myEdges = [];
+    let myEdgeIds = [];
+    
+    await session
+      .run(query, params)
+      .then(result => {
+        result.records.forEach(record => {
+          node = record.get('n')
+          node2 = record.get('m')
+          
+          nodeId = node['identity']['low'];
+          node2Id = node2['identity']['low'];
+          if (!myNodeIds.includes(nodeId)) {
+            myNodes.push(node);
+            myNodeIds.push(nodeId);
+          }
+          
+          if (!myNodeIds.includes(node2Id)) {
+            myNodes.push(node2);
+            myNodeIds.push(node2Id);
+          }
+          
+          rel = record.get('r')
+          edgeId = rel['identity']['low'];
+          if (!myEdgeIds.includes(edgeId)) {
+            myEdges.push(rel);
+            myEdgeIds.push(edgeId);
+          }
+          
+          //console.log(node);
+          //console.log(node2);
+          //console.log(rel);
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+      .then(() => session.close())
+      
+      return {nodes:myNodes, edges:myEdges, nodeIds:myNodeIds, edgeIds:myEdgeIds};
+      
+    };
+
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+<script type="text/javascript">
+  
+  var edgeWeight = 0;
+  var pCutoff = 1;
+  var qCutoff = 1;
+  var fdrCutoff = 1;
+  var limitCutoff = 100;
+  var study = "ASD_ASD_MalesOnly";
+  
+  // create an array with nodes
+  var nodes = new vis.DataSet([
+    <!-- {id: 1, label: 'Node 1'} -->
+  ]);
+
+  // create an array with edges
+  var edges = new vis.DataSet([
+   
+  ]);
+
+  // create a network
+  var container = document.getElementById('mynetwork');
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {
+    nodes: {
+        shape: 'dot',
+        size: 10,
+        font: {
+            size: 20
+        },
+        borderWidth: 2,
+        shadow:true
+    },
+    edges: {
+        width: 2,
+        shadow:true
+    }};
+  var network = new vis.Network(container, data, options);
+  
+   
+    <!-- network.on("dragStart", function (params) { -->
+        <!-- node_id = params['nodes'][0] -->
+        <!-- nodes.update({id:node_id, fixed: false, physics:true}) -->
+    <!-- }); -->
+   
+    network.on("dragEnd", function (params) {
+        node_id = params['nodes'][0]
+        nodes.update({id:node_id, fixed: true, physics:false})
+    });
+  
+</script>
+
+</center>
+</body>
+</html>
